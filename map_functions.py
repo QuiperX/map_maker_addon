@@ -158,14 +158,11 @@ def combine_meshes(selected_objects):
         print("for this object:" + obj.name)
         bpy.context.view_layer.objects.active = obj
 
-        #before modifiers, if there are any shape keys,
-        if obj.data.shape_keys:
-            print("applying shape keys")
-            for shape_key in obj.data.shape_keys.key_blocks:
-                print("applying shape key:", shape_key.name)
-                shape_key.value = 1.0
-                bpy.ops.object.shape_key_add(from_mix=True)
-                bpy.ops.object.shape_key_remove(all=True)
+        #before modifiers, apply all shape keys
+        try:
+            bpy.ops.object.shape_key_remove(all=True, apply_mix = True)
+        except:
+            print("no shape keys to remove")
 
         for modifier in obj.modifiers:
             print("applying modifier:", modifier.name)
