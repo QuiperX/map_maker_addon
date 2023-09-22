@@ -259,6 +259,8 @@ def generate_height_maps(self, context):
             bpy.data.scenes.remove(bpy.data.scenes["heightMapCreator"])
         except:
             pass
+        #error message
+        self.report({"ERROR"}, "ERROR: " + str(e))
 
 
 
